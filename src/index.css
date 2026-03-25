@@ -1,0 +1,164 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&family=Roboto+Mono:wght@400;500;700&display=swap');
+@import "tailwindcss";
+
+:root {
+  --bg: #f8f8f8;
+  --fg: #111111;
+  --border: rgba(0, 0, 0, 0.08);
+  --muted: #999999;
+  --font-sans: 'Inter', sans-serif;
+  --font-mono: 'Roboto Mono', monospace;
+  --sidebar-w: 70px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Horizontal Scroll Layout */
+.horizontal-scroll-wrapper {
+  display: flex;
+  flex-wrap: nowrap;
+  width: fit-content;
+  position: relative;
+  height: 100vh;
+}
+
+section.panel {
+  flex-shrink: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 var(--sidebar-w);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Sidebars (9to5 Style) */
+.sidebar {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: var(--sidebar-w);
+  background: var(--fg);
+  color: var(--bg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  mix-blend-mode: difference;
+}
+
+.sidebar-left { left: 0; border-right: 1px solid var(--border); }
+.sidebar-right { right: 0; border-left: 1px solid var(--border); }
+
+.vertical-text {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-size: 0.7rem;
+  font-weight: 700;
+  font-family: var(--font-mono);
+}
+
+/* Typography */
+h1.hero-title {
+  font-size: clamp(4rem, 15vw, 12rem);
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  line-height: 0.85;
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+}
+
+.text-reveal {
+  overflow: hidden;
+}
+
+.mono { font-family: var(--font-mono); }
+
+/* Project Gallery */
+.gallery-item {
+  width: 45vw;
+  height: 70vh;
+  margin-right: 10vw;
+  position: relative;
+  background: #eee;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(1);
+  transition: filter 0.6s ease;
+}
+
+.gallery-item:hover img {
+  filter: grayscale(0);
+}
+
+.project-number {
+  position: absolute;
+  top: 2rem;
+  left: -2rem;
+  background: var(--fg);
+  color: var(--bg);
+  padding: 1rem 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+}
+
+.project-info {
+  position: absolute;
+  bottom: -4rem;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--border);
+}
+
+/* Progress bar (9to5 style) */
+.scroll-progress {
+  position: fixed;
+  bottom: 0;
+  left: var(--sidebar-w);
+  right: var(--sidebar-w);
+  height: 4px;
+  background: var(--fg);
+  transform-origin: left;
+  transform: scaleX(0);
+  z-index: 2000;
+}
+
+@media (max-width: 1024px) {
+  .horizontal-scroll-wrapper {
+    flex-direction: column;
+    height: auto;
+  }
+  section.panel {
+    width: 100vw;
+    height: auto;
+    padding: 10rem 2rem;
+  }
+  .sidebar { display: none; }
+}
